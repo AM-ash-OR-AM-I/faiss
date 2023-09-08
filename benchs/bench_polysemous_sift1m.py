@@ -11,7 +11,9 @@ import numpy as np
 
 import faiss
 from datasets import load_sift, evaluate
+import time
 
+start = time.time()
 
 print("load data")
 xb, xq, xt, gt = load_sift(dir="siftsmall", file_prefix="siftsmall")
@@ -45,3 +47,6 @@ for ht in 64, 62, 58, 54, 50, 46, 42, 38, 34, 30:
     index.polysemous_ht = ht
     t, r = evaluate(index, xq, gt, 1)
     print("\t %7.3f ms per query, R@1 %.4f" % (t, r[1]))
+
+end = time.time()
+print(f"Time taken = {end-start}")
