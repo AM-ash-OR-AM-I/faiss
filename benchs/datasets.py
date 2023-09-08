@@ -10,21 +10,21 @@ import numpy as np
 
 
 def ivecs_read(fname):
-    a = np.fromfile(fname, dtype='int32')
+    a = np.fromfile(fname, dtype="int32")
     d = a[0]
     return a.reshape(-1, d + 1)[:, 1:].copy()
 
 
 def fvecs_read(fname):
-    return ivecs_read(fname).view('float32')
+    return ivecs_read(fname).view("float32")
 
 
-def load_sift1M():
-    print("Loading sift1M...", end='', file=sys.stderr)
-    xt = fvecs_read("sift1M/sift_learn.fvecs")
-    xb = fvecs_read("sift1M/sift_base.fvecs")
-    xq = fvecs_read("sift1M/sift_query.fvecs")
-    gt = ivecs_read("sift1M/sift_groundtruth.ivecs")
+def load_sift(dir: str = "sift1M", file_prefix="sift"):
+    print(f"Loading {dir}...", end="", file=sys.stderr)
+    xt = fvecs_read(f"{dir}/{file_prefix}_learn.fvecs")
+    xb = fvecs_read(f"{dir}/{file_prefix}_base.fvecs")
+    xq = fvecs_read(f"{dir}/{file_prefix}_query.fvecs")
+    gt = ivecs_read(f"{dir}/{file_prefix}_groundtruth.ivecs")
     print("done", file=sys.stderr)
 
     return xb, xq, xt, gt

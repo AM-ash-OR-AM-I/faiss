@@ -5,9 +5,9 @@
 
 from __future__ import print_function
 import faiss
-from datasets import load_sift1M, evaluate
+from datasets import load_sift, evaluate
 
-xb, xq, xt, gt = load_sift1M()
+xb, xq, xt, gt = load_sift()
 nq, d = xq.shape
 
 k = 32

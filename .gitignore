@@ -7,6 +7,8 @@
 *.dylib
 *.pyc
 *~
+build/
+sift1M/
 /config.*
 /aclocal.m4
 /autom4te.cache/
