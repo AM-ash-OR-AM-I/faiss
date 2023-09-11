@@ -19,3 +19,5 @@ siftsmall/
 /tests/test
 /tests/gtest/
 faiss/python/swigfaiss_avx2.swig
+venv
+results
