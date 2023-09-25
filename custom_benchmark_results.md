@@ -27,7 +27,7 @@
 
 - Download `sift1M` using `curl -O ftp://ftp.irisa.fr/local/texmex/corpus/sift.tar.gz && tar -xvf sift.tar.gz`
 - Rename `sift/` to `sift1M/`
-- Run `python hnsw_benchmark.py 10`, `k=10` denoting the number of neighbors to search.
+- Run [benchmark](./benchs/bench_hnsw.py) by `python benchs/hnsw_benchmark.py 10`, `k=10` denoting the number of neighbors to search.
 
 ### Logs
 
@@ -35,7 +35,7 @@
 
 ### CPU usage
 
-- [CPU usage](results/hnsw_benchmark_cpu_usage.txt) can be recorded using `perf record python benchs/bench_hnsw.py 10` -> `perf report`
+- [CPU usage](./results/hnsw_benchmark_cpu_usage.txt) can be recorded using `perf record python benchs/bench_hnsw.py 10` -> `perf report`
 - Mainly the following command invocation were responsible for CPU usage:
   
   ```sh
