@@ -23,3 +23,4 @@ venv
 results/*.data*
 data/*
 !data/hnsw_benchmark_k10.txt
+*.data*
