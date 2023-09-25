@@ -21,3 +21,5 @@ siftsmall/
 faiss/python/swigfaiss_avx2.swig
 venv
 results/*.data*
+data/*
+!data/hnsw_benchmark_k10.txt

@@ -1,0 +1,221 @@
+hnsw_add_vertices: adding 1000000 elements on top of 0 (preset_levels=0)
+  max_level = 4
+Adding 1 elements at level 4
+Adding 26 elements at level 3
+Adding 951 elements at level 2
+Adding 30276 elements at level 1
+  10001 / 30276
+Adding 968746 elements at level 0
+  10001 / 968746
+  20002 / 968746
+  30003 / 968746
+  40004 / 968746
+  50005 / 968746
+  60006 / 968746
+  70007 / 968746
+  80008 / 968746
+  90009 / 968746
+  100010 / 968746
+  110011 / 968746
+  120012 / 968746
+  130013 / 968746
+  140014 / 968746
+  150015 / 968746
+  160016 / 968746
+  170017 / 968746
+  180018 / 968746
+  190019 / 968746
+  200020 / 968746
+  210021 / 968746
+  220022 / 968746
+  230023 / 968746
+  240024 / 968746
+  250025 / 968746
+  260026 / 968746
+  270027 / 968746
+  280028 / 968746
+  290029 / 968746
+  300030 / 968746
+  310031 / 968746
+  320032 / 968746
+  330033 / 968746
+  340034 / 968746
+  350035 / 968746
+  360036 / 968746
+  370037 / 968746
+  380038 / 968746
+  390039 / 968746
+  400040 / 968746
+  410041 / 968746
+  420042 / 968746
+  430043 / 968746
+  440044 / 968746
+  450045 / 968746
+  460046 / 968746
+  470047 / 968746
+  480048 / 968746
+Done in 156726.835 ms
+hnsw_add_vertices: adding 1000000 elements on top of 0 (preset_levels=0)
+  max_level = 5
+Adding 1 elements at level 5
+Adding 15 elements at level 4
+Adding 194 elements at level 3
+Adding 3693 elements at level 2
+Adding 58500 elements at level 1
+  10001 / 58500
+  20002 / 58500
+Adding 937597 elements at level 0
+  10001 / 937597
+  20002 / 937597
+  30003 / 937597
+  40004 / 937597
+  50005 / 937597
+  60006 / 937597
+  70007 / 937597
+  80008 / 937597
+  90009 / 937597
+  100010 / 937597
+  110011 / 937597
+  120012 / 937597
+  130013 / 937597
+  140014 / 937597
+  150015 / 937597
+  160016 / 937597
+  170017 / 937597
+  180018 / 937597
+  190019 / 937597
+  200020 / 937597
+  210021 / 937597
+  220022 / 937597
+  230023 / 937597
+  240024 / 937597
+  250025 / 937597
+  260026 / 937597
+  270027 / 937597
+  280028 / 937597
+  290029 / 937597
+  300030 / 937597
+  310031 / 937597
+  320032 / 937597
+  330033 / 937597
+  340034 / 937597
+  350035 / 937597
+  360036 / 937597
+  370037 / 937597
+  380038 / 937597
+  390039 / 937597
+  400040 / 937597
+  410041 / 937597
+  420042 / 937597
+  430043 / 937597
+  440044 / 937597
+  450045 / 937597
+  460046 / 937597
+Done in 90650.843 ms
+Training level-1 quantizer
+Training level-1 quantizer on 100000 vectors in 128D
+Training IVF residual
+IndexIVF: no residual training
+IndexIVFFlat::add_core: added 1000000 / 1000000 vectors
+Training level-1 quantizer
+Training L2 quantizer on 100000 vectors in 128D
+Adding centroids to quantizer
+Training IVF residual
+IndexIVF: no residual training
+IndexIVFFlat::add_core: added 1000000 / 1000000 vectors
+Clustering 1000000 points in 128D to 16384 clusters, redo 1 times, 10 iterations
+  Preprocessing in 0.08 s
+  Iteration 0 (139.48 s, search 139.41 s): objective=5.58803e+10 imbalance=1.737 nsplit=5       
+  Iteration 1 (279.65 s, search 279.51 s): objective=4.11771e+10 imbalance=1.378 nsplit=0       
+  Iteration 2 (419.62 s, search 419.42 s): objective=3.9914e+10 imbalance=1.301 nsplit=0       
+  Iteration 3 (560.15 s, search 559.89 s): objective=3.93716e+10 imbalance=1.269 nsplit=0       
+  Iteration 4 (699.93 s, search 699.61 s): objective=3.90659e+10 imbalance=1.253 nsplit=0       
+  Iteration 5 (839.97 s, search 839.55 s): objective=3.88719e+10 imbalance=1.243 nsplit=0       
+  Iteration 6 (979.40 s, search 978.94 s): objective=3.87376e+10 imbalance=1.237 nsplit=0       
+  Iteration 7 (1123.95 s, search 1123.43 s): objective=3.86395e+10 imbalance=1.232 nsplit=0       
+  Iteration 8 (1270.13 s, search 1269.56 s): objective=3.85651e+10 imbalance=1.229 nsplit=0       
+  Iteration 9 (1413.54 s, search 1412.91 s): objective=3.85079e+10 imbalance=1.227 nsplit=0       
+Clustering 1000000 points in 128D to 16384 clusters, redo 1 times, 10 iterations
+  Preprocessing in 0.09 s
+  Iteration 0 (89.56 s, search 88.91 s): objective=5.58862e+10 imbalance=1.737 nsplit=0       
+  Iteration 1 (170.81 s, search 169.57 s): objective=4.11805e+10 imbalance=1.379 nsplit=3       
+  Iteration 2 (252.51 s, search 250.67 s): objective=3.99154e+10 imbalance=1.301 nsplit=0       
+  Iteration 3 (335.71 s, search 333.26 s): objective=3.93738e+10 imbalance=1.269 nsplit=2       
+  Iteration 4 (419.34 s, search 416.14 s): objective=3.90693e+10 imbalance=1.253 nsplit=1       
+  Iteration 5 (500.57 s, search 496.68 s): objective=3.88725e+10 imbalance=1.243 nsplit=0       
+  Iteration 6 (581.93 s, search 577.40 s): objective=3.87964e+10 imbalance=1.236 nsplit=1       
+  Iteration 7 (663.51 s, search 658.31 s): objective=3.86473e+10 imbalance=1.232 nsplit=1       
+  Iteration 8 (744.10 s, search 738.29 s): objective=3.85701e+10 imbalance=1.229 nsplit=1       
+  Iteration 9 (823.98 s, search 817.55 s): objective=3.851e+10 imbalance=1.227 nsplit=0       
+load data
+Testing HNSW Flat
+add
+search
+efSearch 16 bounded queue True 	   0.075 ms per query, R@1 0.9133, missing rate 0.0000
+efSearch 16 bounded queue False 	   0.072 ms per query, R@1 0.9134, missing rate 0.0000
+efSearch 32 bounded queue True 	   0.127 ms per query, R@1 0.9629, missing rate 0.0000
+efSearch 32 bounded queue False 	   0.145 ms per query, R@1 0.9630, missing rate 0.0000
+efSearch 64 bounded queue True 	   0.223 ms per query, R@1 0.9880, missing rate 0.0000
+efSearch 64 bounded queue False 	   0.210 ms per query, R@1 0.9880, missing rate 0.0000
+efSearch 128 bounded queue True 	   0.400 ms per query, R@1 0.9973, missing rate 0.0000
+efSearch 128 bounded queue False 	   0.381 ms per query, R@1 0.9973, missing rate 0.0000
+efSearch 256 bounded queue True 	   0.736 ms per query, R@1 0.9993, missing rate 0.0000
+efSearch 256 bounded queue False 	   0.690 ms per query, R@1 0.9993, missing rate 0.0000
+Testing HNSW with a scalar quantizer
+training
+add
+search
+efSearch 16 	   0.049 ms per query, R@1 0.7943, missing rate 0.0000
+efSearch 32 	   0.075 ms per query, R@1 0.8901, missing rate 0.0000
+efSearch 64 	   0.116 ms per query, R@1 0.9491, missing rate 0.0000
+efSearch 128 	   0.221 ms per query, R@1 0.9812, missing rate 0.0000
+efSearch 256 	   0.436 ms per query, R@1 0.9930, missing rate 0.0000
+Testing IVF Flat (baseline)
+training
+add
+search
+nprobe 1 	   0.138 ms per query, R@1 0.4139, missing rate 0.0300
+nprobe 4 	   0.159 ms per query, R@1 0.6368, missing rate 0.0000
+nprobe 16 	   0.196 ms per query, R@1 0.8322, missing rate 0.0000
+nprobe 64 	   0.317 ms per query, R@1 0.9563, missing rate 0.0000
+nprobe 256 	   0.787 ms per query, R@1 0.9961, missing rate 0.0000
+Testing IVF Flat with HNSW quantizer
+training
+add
+search
+nprobe 1 	   0.049 ms per query, R@1 0.4117, missing rate 0.0321
+nprobe 4 	   0.058 ms per query, R@1 0.6351, missing rate 0.0000
+nprobe 16 	   0.102 ms per query, R@1 0.8314, missing rate 0.0000
+nprobe 64 	   0.207 ms per query, R@1 0.9544, missing rate 0.0000
+nprobe 256 	   0.685 ms per query, R@1 0.9923, missing rate 0.0000
+Performing kmeans on sift1M database vectors (baseline)
+Performing kmeans on sift1M using HNSW assignment
+Testing NSG Flat
+add
+search
+search_L -1 	   0.039 ms per query, R@1 0.8130, missing rate 0.0000
+search_L 16 	   0.052 ms per query, R@1 0.8862, missing rate 0.0000
+search_L 32 	   0.087 ms per query, R@1 0.9501, missing rate 0.0000
+search_L 64 	   0.145 ms per query, R@1 0.9837, missing rate 0.0000
+search_L 128 	   0.254 ms per query, R@1 0.9954, missing rate 0.0000
+search_L 256 	   0.496 ms per query, R@1 0.9995, missing rate 0.0000
+
+IndexNSG::add 1000000 vectors
+  Build knn graph with NNdescent S=10 R=100 L=114 niter=10
+Parameters: K=64, S=10, R=100, L=114, iter=10
+Iter: 0, recall@64: 0.000000
+Iter: 1, recall@64: 0.003125
+Iter: 2, recall@64: 0.025156
+Iter: 3, recall@64: 0.118906
+Iter: 4, recall@64: 0.340156
+Iter: 5, recall@64: 0.591406
+Iter: 6, recall@64: 0.768594
+Iter: 7, recall@64: 0.866250
+Iter: 8, recall@64: 0.925313
+Iter: 9, recall@64: 0.956250
+Addes 1000000 points into the index
+  Check the knn graph
+  nsg building
+NSG::build R=32, L=64, C=132
+Degree Statistics: Max = 32, Min = 1, Avg = 20.056644
+Attached nodes: 0

@@ -1,4 +1,4 @@
-# Results of custom benchmarks
+# Results
 
 ## Polysemous_ANN_128K benchmark
 
@@ -8,7 +8,7 @@
 
 ### CPU usage
 
-- ![CPU usage](results/cpu_usage.txt) using `perf record python benchs/bench_polysemous_sift1m.py` -> `perf report` 
+- ![CPU usage](results/cpu_usage.txt) using `perf record python benchs/bench_polysemous_sift1m.py` -> `perf report`
   - Mainly the following command invocation were responsible for CPU usage:
   
   ```sh
@@ -21,10 +21,18 @@
   .....
   ```
 
-## TODO
+## HNSW Benchmark
 
-- Check how FAISS works by running codes in tutorials
-  
-### Dependency
+### Steps to reproduce
 
-- Learn how to use `cmake` to build FAISS and numpy library to understand the inner-working.
+- Download `sift1M` using `curl -O ftp://ftp.irisa.fr/local/texmex/corpus/sift.tar.gz && tar -xvf sift.tar.gz`
+- Rename `sift/` to `sift1M/`
+- To run install [sift1M](../data/sift1M) dataset and run `python hnsw_benchmark.py 10` denoting the number of neighbors to search for k=10.
+
+### Logs
+
+- [Results](./results/hnsw_benchmark_k10.txt)
+
+### CPU usage
+
+- Can be recorded using `perf record python hnsw_benchmark.py 10` -> `perf report`
