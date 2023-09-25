@@ -27,7 +27,7 @@
 
 - Download `sift1M` using `curl -O ftp://ftp.irisa.fr/local/texmex/corpus/sift.tar.gz && tar -xvf sift.tar.gz`
 - Rename `sift/` to `sift1M/`
-- Run `python hnsw_benchmark.py 10`, `k` denoting the number of neighbors to search.
+- Run `python hnsw_benchmark.py 10`, `k=10` denoting the number of neighbors to search.
 
 ### Logs
 
