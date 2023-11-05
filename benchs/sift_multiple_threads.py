@@ -5,6 +5,7 @@ from functools import wraps
 import json
 import os
 import argparse
+import sys
 import time
 import multiprocessing
 import logging
@@ -12,8 +13,6 @@ import threading
 from typing import List
 from threading import Thread
 import numpy as np
-
-from datasets import load_sift
 
 
 os.makedirs("logs", exist_ok=True)
@@ -24,6 +23,28 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+
+
+def ivecs_read(fname):
+    a = np.fromfile(fname, dtype="int32")
+    d = a[0]
+    return a.reshape(-1, d + 1)[:, 1:].copy()
+
+
+def fvecs_read(fname):
+    return ivecs_read(fname).view("float32")
+
+
+def load_model(dir: str = "sift1M", file_prefix="", numpy=True):
+    print(f"Loading {dir}/{file_prefix}...", end="", file=sys.stderr)
+    if not file_prefix:
+        raise ValueError("file not found")
+    if numpy:
+        xb = np.load(f"{dir}/{file_prefix}.npy")
+    else:
+        xb = fvecs_read(f"{dir}/{file_prefix}.fvecs")
+    print("done", file=sys.stderr)
+    return xb
 
 
 def thread_time_decorator(thread):
@@ -42,21 +63,42 @@ def thread_time_decorator(thread):
 
 
 @thread_time_decorator
-def load_data(training_dataset):
+def load_data(
+    dir: str,
+    file_prefix: str,
+    extract_file_path: str,
+):
     """Load data in parallel"""
+    base_dataset = load_model(dir, file_prefix)
+    with open(extract_file_path, "a") as file_obj:
+        for vector in base_dataset:
+            file_obj.write(str(vector.tolist()).replace(" ", "") + "\n")
 
-    for vector in training_dataset:
-        print(str(list(vector)).replace(" ", ""))
+
+def chunk_dataset(file_prefix: str, dir: str, chunks: int):
+    """Chunk data into multiple files"""
+    xb = load_model(dir, file_prefix, numpy=False)
+    nb, d = xb.shape
+    chunk_size = nb // chunks
+
+    for i in range(chunks):
+        chunk_name = f"{dir}/{file_prefix}_{i}"
+        if os.path.exists(chunk_name):
+            continue
+        np.save(
+            chunk_name,
+            xb[i * chunk_size : (i + 1) * chunk_size],
+        )
 
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser(
         description="Load data in parallel using threading or multiprocessing",
         usage="""
-        python3 benchs/sift_multiple_threads.py --multiprocessing --processes 25 --dataset-directory data/sift1B --prefix sift
+        python3 benchs/sift_multiple_threads.py --multiprocessing --chunks 25 --dataset-directory data/sift1B --prefix sift
         """,
     )
-    argparser.add_argument("-n", "--processes", type=int, default=25)
+    argparser.add_argument("-c", "--chunks", type=int, default=100)
     argparser.add_argument(
         "--multiprocessing",
         action=argparse.BooleanOptionalAction,
@@ -67,37 +109,54 @@ if __name__ == "__main__":
         "-dir",
         "--dataset-directory",
         type=str,
+        required=True,
         default="data/sift1M",
-        dest="data",
+        dest="dir",
         help="Path to dataset for SIFT1B/1M dataset",
     )
     argparser.add_argument(
         "-prefix",
-        "--file_prefix",
+        "--file-prefix",
         type=str,
         default="sift",
         dest="file_prefix",
         help="Prefix for SIFT1B/1M dataset files",
     )
+    argparser.add_argument(
+        "-o",
+        "--extracted-file-path",
+        type=str,
+        required=True,
+        default="data/extract_multiple_texts.txt",
+        dest="extract_file_path",
+        help="Path to save extracted file",
+    )
     args = argparser.parse_args()
-    NUMBER_OF_PROCESSES = args.processes
+    CHUNKS = args.chunks
 
     logger.info("Loading data")
-    xb, xq, xt, gt = load_sift(dir=args.data, file_prefix=args.file_prefix)
-    nb, d = xb.shape
-    logger.debug("xb: %s", xb.shape)
 
-    # Divide xb into number of processes
     process_time_map = {}
-    xb_splitted = np.array_split(xb, NUMBER_OF_PROCESSES)
-    logger.debug("xb_splitted: %s", len(xb_splitted))
+    if os.path.exists(args.extract_file_path):
+        os.remove(args.extract_file_path)
+    # Save data in chunks
+    file_prefix = args.file_prefix if args.file_prefix else ""
+    chunk_dataset(args.file_prefix, args.dir, CHUNKS)
+
+    # Load data from chunks
     if args.multiprocessing:
         # Use multiprocessing to load data in parallel
         # Multiprocessing is much more faster than threading
         logger.info("Using multiprocessing")
-        with multiprocessing.Pool(processes=NUMBER_OF_PROCESSES) as pool:
+        with multiprocessing.Pool(processes=CHUNKS) as pool:
             start = time.perf_counter()
-            pool.map(load_data, xb_splitted)
+            pool.starmap(
+                load_data,
+                [
+                    (args.dir, f"{file_prefix}_{i}", args.extract_file_path)
+                    for i in range(CHUNKS)
+                ],
+            )
             pool.close()
             pool.join()
             end = time.perf_counter()
@@ -109,8 +168,12 @@ if __name__ == "__main__":
         # Make sure threads are synchronized
         logger.info("Using threading")
         thread_pool: List[Thread] = []
-        for i in range(NUMBER_OF_PROCESSES):
-            t = Thread(target=load_data, args=(xb_splitted[i],), name=f"Thread_{i}")
+        for i in range(CHUNKS):
+            t = Thread(
+                target=load_data,
+                args=(args.dir, f"{file_prefix}_{i}", args.extract_file_path),
+                name=f"Thread-{i}",
+            )
             thread_pool.append(t)
             t.start()
 
