@@ -95,7 +95,7 @@ if __name__ == "__main__":
     argparser = argparse.ArgumentParser(
         description="Load data in parallel using threading or multiprocessing",
         usage="""
-        python3 benchs/sift_multiple_threads.py --multiprocessing --chunks 25 --dataset-directory data/sift1B --prefix sift
+        python3 benchs/sift_multiple_threads.py --chunks 100 --multiprocessing --dataset-directory data/sift1M --file-prefix sift_base -o data/extracted_vectors.txt
         """,
     )
     argparser.add_argument("-c", "--chunks", type=int, default=100)
