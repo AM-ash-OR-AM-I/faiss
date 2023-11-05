@@ -70,7 +70,9 @@ def load_data(
 ):
     """Load data in parallel"""
     base_dataset = load_model(dir, file_prefix)
-    with open(extract_file_path, "a") as file_obj:
+    if os.path.exists(f"{extract_file_path}.txt"):
+        os.remove(f"{extract_file_path}.txt")
+    with open(f"{extract_file_path}.txt", "w") as file_obj:
         for vector in base_dataset:
             file_obj.write(str(vector.tolist()).replace(" ", "") + "\n")
 
@@ -137,8 +139,7 @@ if __name__ == "__main__":
     logger.info("Loading data")
 
     process_time_map = {}
-    if os.path.exists(args.extract_file_path):
-        os.remove(args.extract_file_path)
+
     # Save data in chunks
     file_prefix = args.file_prefix if args.file_prefix else ""
     chunk_dataset(args.file_prefix, args.dir, CHUNKS)
@@ -153,7 +154,7 @@ if __name__ == "__main__":
             pool.starmap(
                 load_data,
                 [
-                    (args.dir, f"{file_prefix}_{i}", args.extract_file_path)
+                    (args.dir, f"{file_prefix}_{i}", f"{args.extract_file_path}_{i}")
                     for i in range(CHUNKS)
                 ],
             )
@@ -171,7 +172,7 @@ if __name__ == "__main__":
         for i in range(CHUNKS):
             t = Thread(
                 target=load_data,
-                args=(args.dir, f"{file_prefix}_{i}", args.extract_file_path),
+                args=(args.dir, f"{file_prefix}_{i}", f"{args.extract_file_path}_{i}"),
                 name=f"Thread-{i}",
             )
             thread_pool.append(t)
