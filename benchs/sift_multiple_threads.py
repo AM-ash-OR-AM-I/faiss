@@ -15,16 +15,20 @@ import threading
 from typing import List
 from threading import Thread
 import numpy as np
-import array
 
-f32_arr = array.array("b", [1, 2, 3])
-vector_data_32 = array.array("b", [1, 2, 3])
+from logging.handlers import RotatingFileHandler
 
 os.makedirs("logs", exist_ok=True)
 
+handlers = [
+    RotatingFileHandler(
+        "logs/sift_multiple_threads.log", maxBytes=1000000, backupCount=1
+    ),
+    logging.StreamHandler(),
+]
 logging.basicConfig(
-    format="%(asctime)s %(levelname)s %(message)s",
-    filename="logs/output.log",
+    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
+    handlers=handlers,
 )
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -77,12 +81,16 @@ def load_data(
     extract_file_path: str,
 ):
     """Load data in parallel"""
+    logger.info("Loading data from chunk %s", chunk_index)
     base_dataset = load_chunk(f"{dir}/{file_prefix}.fvecs", chunk_index, CHUNKS)
+    logger.info("Finished loading data from chunk %s", chunk_index)
+    logger.info("Saving data from chunk %s", chunk_index)
     if os.path.exists(f"{extract_file_path}.txt"):
         os.remove(f"{extract_file_path}.txt")
     with open(f"{extract_file_path}.txt", "w") as file_obj:
         for vector in base_dataset:
             file_obj.write(str(vector.tolist()).replace(" ", "") + "\n")
+
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser(
@@ -139,8 +147,6 @@ if __name__ == "__main__":
     )
     args = argparser.parse_args()
     CHUNKS = args.chunks
-
-    logger.info("Loading data")
 
     process_time_map = {}
 
