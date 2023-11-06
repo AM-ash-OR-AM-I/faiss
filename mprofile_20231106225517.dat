@@ -1,0 +1,6 @@
+CMDLINE python3 benchs/sift_multiple_threads.py --chunks 100 --dataset-directory data/sift1M --file-prefix sift_base -o data/extracted_vectors
+MEM 0.125000 1699291517.0825
+MEM 22.125000 1699291517.1828
+MEM 35.687500 1699291517.2832
+MEM 37.562500 1699291517.3835
+MEM 39.562500 1699291517.4839
